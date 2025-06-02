@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Selected Books</title>
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		body {
+			padding: 40px;
+			background-image: url('https://cdn.pixabay.com/photo/2021/01/21/15/54/books-5937716_1280.jpg');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			min-height: 100vh;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		h2 {
+			margin-bottom: 30px;
+			color: #343a40;
+		}
+
+		.no-books {
+			font-style: italic;
+			color: #6c757d;
+		}
+
+		.container {
+			background-color: rgba(255, 255, 255, 0.95);
+			border-radius: 15px;
+			padding: 30px;
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+		}
+
+		.back-button {
+			position: absolute;
+			top: 20px;
+			left: 30px;
+		}
+
+		.back-button .btn {
+			background-color: #343a40;
+			color: white;
+			font-weight: 500;
+		}
+
+		.back-button .btn:hover {
+			background-color: #0056b3;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- Back Button -->
+	<div class="back-button">
+		<a href="javascript:history.back()" class="btn btn-sm">&larr; Back</a>
+	</div>
+
+	<div class="container mt-5">
+		<h2 class="text-center">Selected Books</h2>
+
+		<!-- Show error if book already selected -->
+		<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+		<!-- Show success message if book was added -->
+		<div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+		<!-- Message when no books selected -->
+		<div th:if="${#lists.isEmpty(selectedBooks)}" class="alert alert-info no-books text-center">
+			No books selected yet.
+		</div>
+
+		<!-- Table view -->
+		<table class="table table-bordered table-hover" th:if="${!#lists.isEmpty(selectedBooks)}">
+			<thead class="thead-dark">
+				<tr>
+					<th>Sl No</th>
+					<th>Book Name</th>
+					<th>Author</th>
+					<th>Created At</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="selectedBook, iterStat : ${selectedBooks}">
+					<td th:text="${iterStat.index + 1}">1</td>
+					<td th:text="${selectedBook.book.bookName}">Book Name</td>
+					<td th:text="${selectedBook.book.author}">Author</td>
+					<td th:text="${#dates.format(selectedBook.book.created_at, 'yyyy-MM-dd HH:mm')}">Date</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+
+</html>
