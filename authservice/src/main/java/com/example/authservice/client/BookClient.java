@@ -25,4 +25,7 @@ public interface BookClient {
 
     @DeleteMapping("/api/v1/book/{id}")
     void deleteBook(@PathVariable("id") int id);
+    @GetMapping("/api/v1/book/books/{id}")
+    Book fetchBookById(@PathVariable("id") int id);
+
 }

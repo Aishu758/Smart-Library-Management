@@ -21,7 +21,9 @@ public class SecurityConfig {
         http
             // Authorization config
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/login", "/registration", "/css/**", "/js/**", "/images/**", "/api/v1/book/add").permitAll()
+            		.requestMatchers("/", "/login", "/loginuser","/userbooks", "/registration",
+                            "/css/**", "/js/**", "/images/**", "/api/v1/book/add",
+                            "/books", "/selectedBooks", "/selectBook/**","/index").permitAll()
                 .requestMatchers("/admin/**").authenticated()
                 .requestMatchers("/user/**").authenticated()
                 .anyRequest().authenticated()
@@ -50,10 +52,11 @@ public class SecurityConfig {
         return (HttpServletRequest request, HttpServletResponse response, Authentication authentication) -> {
             String username = authentication.getName();
             if ("admin".equalsIgnoreCase(username)) {
-                response.sendRedirect("/admin");
+                response.sendRedirect("/admin");  // Admin redirect
             } else {
-                response.sendRedirect("/user");
+                response.sendRedirect("/user");  // Redirect to userbooks page after successful login
             }
         };
     }
+
 }
