@@ -41,6 +41,13 @@ public class BookController {
             return "add";
         }
     }
+    @GetMapping("/books/{id}")
+    @ResponseBody
+    public ResponseEntity<Book> getBookByIdRest(@PathVariable("id") int id) {
+        return service.findById(id)
+                .map(book -> ResponseEntity.ok().body(book))
+                .orElse(ResponseEntity.notFound().build());
+    }
 
     // Show edit form for a book (GET)
     @GetMapping("/edit/{id}")
