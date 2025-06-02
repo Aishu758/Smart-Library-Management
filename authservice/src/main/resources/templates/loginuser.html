@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Login</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">User Login</h2>
+
+    <!-- ✅ Action updated to /loginuser and removed th:object -->
+    <form action="/loginuser" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <!-- ✅ Plain input field with 'name' for manual binding -->
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <!-- ✅ Plain input field with 'name' for manual binding -->
+            <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+
+    <!-- ✅ Custom error message for manual login handling -->
+    <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+</div>
+</body>
+</html>
