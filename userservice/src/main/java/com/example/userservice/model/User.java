@@ -16,18 +16,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userid;
-	@Column(unique = true, nullable = false)
-	private String username;
-	private String password;
-	@Column(unique = true, nullable = false)
-	private String email;
-	@Column(unique = true, nullable = false)
-	private Long phonenumber;
-//	private String role;
-	@CreationTimestamp
-	private LocalDateTime createdAt;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userid;
 
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    private String password;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(unique = true, nullable = false)
+    private Long phonenumber;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }

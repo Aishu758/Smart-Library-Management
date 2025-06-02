@@ -38,7 +38,8 @@ public class UserService {
 		return userRepository.findByUsernameAndPassword(username, password);
 	}
 
-	public Optional<User> findByUsername(String username) {
+	public User findByUsername(String username) {
+		// TODO Auto-generated method stub
 		return userRepository.findByUsername(username);
 	}
 
